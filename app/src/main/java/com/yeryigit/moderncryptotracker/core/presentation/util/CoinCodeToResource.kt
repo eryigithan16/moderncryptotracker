@@ -1,4 +1,4 @@
-package com.yeryigit.moderncryptotracker.util
+package com.yeryigit.moderncryptotracker.core.presentation.util
 
 import com.yeryigit.moderncryptotracker.R
 

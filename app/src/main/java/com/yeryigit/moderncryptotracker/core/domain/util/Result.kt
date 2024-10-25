@@ -1,4 +1,4 @@
-package com.yeryigit.moderncryptotracker.util
+package com.yeryigit.moderncryptotracker.core.domain.util
 
 typealias DomainError = Error
 

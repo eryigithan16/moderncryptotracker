@@ -2,7 +2,7 @@ package com.yeryigit.moderncryptotracker.crypto.presentation.models
 
 import androidx.annotation.DrawableRes
 import com.yeryigit.moderncryptotracker.crypto.domain.Coin
-import com.yeryigit.moderncryptotracker.util.getDrawableIdForCoin
+import com.yeryigit.moderncryptotracker.core.presentation.util.getDrawableIdForCoin
 import java.text.NumberFormat
 import java.util.Locale
 
