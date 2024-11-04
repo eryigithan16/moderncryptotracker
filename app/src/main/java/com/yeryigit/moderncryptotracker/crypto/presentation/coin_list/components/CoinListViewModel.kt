@@ -5,11 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.yeryigit.moderncryptotracker.core.domain.util.onError
 import com.yeryigit.moderncryptotracker.core.domain.util.onSuccess
 import com.yeryigit.moderncryptotracker.crypto.domain.CoinDataSource
+import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListEvent
 import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListState
 import com.yeryigit.moderncryptotracker.crypto.presentation.models.toCoinUi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -24,6 +27,10 @@ class CoinListViewModel(private val coinDataSource: CoinDataSource) : ViewModel(
             SharingStarted.WhileSubscribed(5000L),
             CoinListState()
         )
+
+    private val _events = Channel<CoinListEvent>()
+    val events = _events.receiveAsFlow() //Chanel'ı bir flow'a dönüştürdü
+
 
     fun onAction(action: CoinListAction) {
         when (action) {
@@ -42,6 +49,7 @@ class CoinListViewModel(private val coinDataSource: CoinDataSource) : ViewModel(
                 }
                 .onError { error ->
                     _state.update { it.copy(isLoading = false) }
+                    _events.send(CoinListEvent.Error(error))
                 }
         }
     }
