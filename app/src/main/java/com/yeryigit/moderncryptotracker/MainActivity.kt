@@ -16,7 +16,7 @@ import com.yeryigit.moderncryptotracker.core.presentation.util.ObserveAsEvents
 import com.yeryigit.moderncryptotracker.core.presentation.util.toString
 import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListEvent
 import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListScreen
-import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.components.CoinListViewModel
+import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListViewModel
 import com.yeryigit.moderncryptotracker.ui.theme.ModernCryptoTrackerTheme
 import org.koin.androidx.compose.koinViewModel
 

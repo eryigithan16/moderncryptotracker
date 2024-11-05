@@ -3,7 +3,7 @@ package com.yeryigit.moderncryptotracker.di
 import com.yeryigit.moderncryptotracker.core.data.networking.HttpClientFactory
 import com.yeryigit.moderncryptotracker.crypto.data.networking.RemoteCoinDataSource
 import com.yeryigit.moderncryptotracker.crypto.domain.CoinDataSource
-import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.components.CoinListViewModel
+import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListViewModel
 import io.ktor.client.engine.cio.CIO
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf

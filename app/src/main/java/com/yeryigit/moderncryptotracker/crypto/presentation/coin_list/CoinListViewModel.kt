@@ -1,12 +1,11 @@
-package com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.components
+package com.yeryigit.moderncryptotracker.crypto.presentation.coin_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yeryigit.moderncryptotracker.core.domain.util.onError
 import com.yeryigit.moderncryptotracker.core.domain.util.onSuccess
 import com.yeryigit.moderncryptotracker.crypto.domain.CoinDataSource
-import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListEvent
-import com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.CoinListState
+import com.yeryigit.moderncryptotracker.crypto.presentation.models.CoinUi
 import com.yeryigit.moderncryptotracker.crypto.presentation.models.toCoinUi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
 
 class CoinListViewModel(private val coinDataSource: CoinDataSource) : ViewModel() {
 
@@ -35,7 +35,7 @@ class CoinListViewModel(private val coinDataSource: CoinDataSource) : ViewModel(
     fun onAction(action: CoinListAction) {
         when (action) {
             is CoinListAction.OnCoinClick -> {
-
+                selectCoin(action.coinUi)
             }
         }
     }
@@ -49,6 +49,19 @@ class CoinListViewModel(private val coinDataSource: CoinDataSource) : ViewModel(
                 }
                 .onError { error ->
                     _state.update { it.copy(isLoading = false) }
+                    _events.send(CoinListEvent.Error(error))
+                }
+        }
+    }
+
+    private fun selectCoin(coinUi: CoinUi) {
+        _state.update { it.copy(selectedCoin = coinUi) }
+        viewModelScope.launch {
+            coinDataSource.getCoinHistory(coinId = coinUi.id, start = ZonedDateTime.now().minusDays(5), end = ZonedDateTime.now())
+                .onSuccess { history ->
+                    println(history)
+                }
+                .onError { error ->
                     _events.send(CoinListEvent.Error(error))
                 }
         }

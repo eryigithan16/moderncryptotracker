@@ -1,4 +1,4 @@
-package com.yeryigit.moderncryptotracker.crypto.presentation.coin_list.components
+package com.yeryigit.moderncryptotracker.crypto.presentation.coin_list
 
 import com.yeryigit.moderncryptotracker.crypto.presentation.models.CoinUi
 
