@@ -3,6 +3,7 @@ package com.yeryigit.moderncryptotracker.crypto.presentation.models
 import androidx.annotation.DrawableRes
 import com.yeryigit.moderncryptotracker.crypto.domain.Coin
 import com.yeryigit.moderncryptotracker.core.presentation.util.getDrawableIdForCoin
+import com.yeryigit.moderncryptotracker.crypto.presentation.coin_detail.DataPoint
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -14,7 +15,8 @@ data class CoinUi(
     val marketCapUsd: DisplayableNumber,
     val priceUsd: DisplayableNumber,
     val changePercent24Hr: DisplayableNumber,
-    @DrawableRes val iconRes: Int
+    @DrawableRes val iconRes: Int,
+    val coinPriceHistory: List<DataPoint> = emptyList()
 )
 
 data class DisplayableNumber(
