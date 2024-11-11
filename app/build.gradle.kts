@@ -30,6 +30,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "BASE_URL", "\"https://api.coincap.io/v2/\"")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
